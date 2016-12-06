@@ -1,0 +1,28 @@
+{
+    "name": "AMgradeTZ/geocoding",
+    "description": "Test package for AMgrade",
+    "keywords": [],
+    "homepage": "https://github.com/beHappyNow/AMgradeTZ",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Belonozhko Artyom",
+            "email": "artemb.step@gmail.com",
+            "homepage": "http://author-website.example.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.5.0",
+        "guzzlehttp/guzzle": "~6.0"
+
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "AMgradeTZ\\GeoCoding\\": "src"
+        }
+    }
+}
