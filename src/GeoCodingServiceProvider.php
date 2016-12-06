@@ -4,7 +4,7 @@ namespace AMgradeTZ\GeoCoding;
 
 use Illuminate\Support\ServiceProvider;
 
-class HtmlServiceProvider extends ServiceProvider
+class GeoCodingServiceProvider extends ServiceProvider
 {
 
     public function register()
