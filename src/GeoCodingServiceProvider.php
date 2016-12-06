@@ -27,7 +27,7 @@ class GeoCodingServiceProvider extends ServiceProvider
     protected function registerGeoCoder()
     {
         $this->app->singleton('geocoder', function ($app) {
-            return new GeoCodingClient(config('geocoder.GOOGLE_MAPS_API_KEY'), $app['cache']);
+            return new GeoCodingClient(config('geocoder.GOOGLE_MAPS_API_KEY'), App('Cache'));
         });
     }
 }
