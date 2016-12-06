@@ -52,16 +52,11 @@ class GeoCodingClient
         $response = $this->requestor->makeRequest($this->state);
 
         if ($response->status == "OK") {
-            echo "<pre>";
-            var_dump($response);
-            echo "</pre>";
+            return $response;
         }
 
         if ($response->status == "ZERO_RESULTS") {
-            echo "error";
-            echo "<pre>";
-            var_dump($response);
-            echo "</pre>";
+            return $response;
         }
     }
 
