@@ -11,9 +11,11 @@ class GeoCodingClient
     /** @var object IValidator  */
     private $validator;
 
-    /** @var object GeoRequestor  */
+    /** @var object GeoRequestor encapsulate behavior of request. Straight or reverse. */
     private $requestor;
 
+
+    /** @var object State encapsulate variables of state of request */
     private $state;
 
 
@@ -44,22 +46,34 @@ class GeoCodingClient
         }
     }
 
+    /**
+     * Execution of the request is delegated to the requestor object
+     *
+     * @return \stdClass mixed. The same fields and values, as in json response from API.
+     *
+     * public array 'results'
+     * * address_components
+     * * formatted_address
+     * * geometry
+     * * place_id
+     * * types
+     *
+     * public string 'status'.
+     * Possible values: 'OK', 'ZERO_RESULTS', 'OVER_QUERY_LIMIT', 'REQUEST_DENIED', 'INVALID_REQUEST', 'UNKNOWN_ERROR'
+     */
     public function makeRequest()
     {
-
-        $response = "";
-
         $response = $this->requestor->makeRequest($this->state);
 
-        if ($response->status == "OK") {
-            return $response;
-        }
-
-        if ($response->status == "ZERO_RESULTS") {
-            return $response;
-        }
+        return $response;
     }
 
+
+    /**
+     * @param $direction GeoCodingClient::STRAIGHT or GeoCodingClient::REVERSE
+     * @return $this
+     * @throws GeoCodingClientException
+     */
     public function setDirection($direction)
     {
         try {
@@ -74,6 +88,12 @@ class GeoCodingClient
         }
     }
 
+    /**
+     * Set language of answer from Google API
+     * @param string $language
+     * @return $this
+     * @throws GeoCodingClientException
+     */
     public function setLanguage($language)
     {
         try {
@@ -85,6 +105,12 @@ class GeoCodingClient
         }
     }
 
+    /**
+     * Set coordinates parameter of request to API. Is necessary for REVERSE GeoCoding request.
+     * @param float $lat
+     * @param float $lng
+     * @return $this
+     */
     public function setCoordinates($lat, $lng)
     {
         $value = $lat.','.$lng;
@@ -92,6 +118,11 @@ class GeoCodingClient
         return $this;
     }
 
+    /**
+     * Set address parameter of request to API. Is necessary for STRAIT GeoCoding request.
+     * @param string $address
+     * @return $this
+     */
     public function setAddress($address)
     {
         $this->state->setAddress($address);
